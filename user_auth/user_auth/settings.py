@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -134,8 +135,10 @@ STATIC_URL = '/static/'
 
 SITE_ID = 1
 
-
+# allauth config
+# redirect to login
 LOGIN_URL = '/accounts/login/'
+# redirect to home
 LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
