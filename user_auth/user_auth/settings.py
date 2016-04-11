@@ -71,9 +71,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
-                "allauth.socialaccount.context_processors.socialaccount",
-                "django.core.context_processors.request",
-                "allauth.account.context_processors.account",
             ],
         },
     },
@@ -178,12 +175,3 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 
 
-# auth and allauth settings
-LOGIN_REDIRECT_URL = '/'
-SOCIALACCOUNT_QUERY_EMAIL = True
-SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'SCOPE': ['email', 'publish_stream'],
-        'METHOD': 'js_sdk'  # instead of 'oauth2'
-    }
-}
