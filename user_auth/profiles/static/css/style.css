@@ -48,12 +48,34 @@ body{
 .socialaccount_providers li:nth-child(1){
         border-right: .1em solid #000;
 }
+.socialaccount_providers li img{
+    width: 25%;
+}
+.socialaccount_providers li a{
+    color: #000;
+}
 .login  label[for=id_remember]{
-    display:block;
+    display: block;
+    text-align: right;
+    width: 55%;
+    float: left;
+}
+#id_remember{
+    float: left;
+    width: 33%;
+    margin-top: 1.5%;
 }
 .login-or{
     font-weight: bold;
     margin: 1%;
     width: 100%;
     font-size: 1.3em;
+}
+.secondaryAction{
+    color:#fff;
+}
+
+.already{
+        width: 100%;
+    clear: both;
 }

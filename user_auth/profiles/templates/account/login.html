@@ -10,7 +10,7 @@
 <div class="columns large-4 large-offset-4 signup_box signup_box">
        <div class="signup-panel">
 
-<h1>{% trans "Welcome Back" %}</h1>
+<h1>{% trans "Time For Good" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -50,7 +50,7 @@
   <button class="primaryAction button" type="submit">{% trans "Sign In" %}</button>
 </form>
 <br>
- <p>{% blocktrans %}Dont have an account? Then please <br><a href="{{ signup_url }}" >Sign Up</a>.{% endblocktrans %}</p>
+ <p class="already">{% blocktrans %}Dont have an account? Then please <br><a href="{{ signup_url }}" >Sign Up</a>.{% endblocktrans %}</p>
 </div>
 
 </div>
