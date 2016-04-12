@@ -1,10 +1,8 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Test</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    </head>
-    <body class="logged-out">
-    </body>
-</html>
+
+
+     {% block body %}
+       <div class="logged-out">
+    </div>
+    {% endblock %}

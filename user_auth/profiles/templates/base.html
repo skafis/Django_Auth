@@ -1,9 +1,24 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
+    
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Time for Good</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Foundation css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+        <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <!--<link rel="stylesheet" href="{% static 'css/main.css' %}">-->
+        <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/png">
+        
   </head>
   <body>
     {% block body %}
@@ -36,5 +51,23 @@
     {% endblock %}
     {% block extra_body %}
     {% endblock %}
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Jquery js -->
+        <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <!-- Foundation js -->
+        <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
   </body>
 </html>
