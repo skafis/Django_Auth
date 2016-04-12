@@ -37,3 +37,23 @@ body{
     font-weight: bold;
     text-decoration: underline;
 }
+/* login style*/
+
+.socialaccount_providers li {
+        width: 50%;
+    float: left;
+    text-align: center;
+    list-style: none;
+}
+.socialaccount_providers li:nth-child(1){
+        border-right: .1em solid #000;
+}
+.login  label[for=id_remember]{
+    display:block;
+}
+.login-or{
+    font-weight: bold;
+    margin: 1%;
+    width: 100%;
+    font-size: 1.3em;
+}
