@@ -1,4 +1,39 @@
-.logged-out {
-    background: url("../img/bg.png") no-repeat center 30px;
-    background-size: 90%;
+body{
+       background-image: url('http://www.timeslive.co.za/incoming/2012/08/17/black_and_white_hands.jpg/ALTERNATES/crop_630x400/black_and_white_hands.jpg');
+       background-repeat:no-repeat;
+       background-size:100% 100%;
+}
+/* SignUp style*/
+.signup_box{
+    background-color: rgba(255, 255, 255, 0.33);
+    margin-top: 7%;
+    text-align: center;
+    border: .01em solid beige;
+    border-radius: .2em;
+}
+.signup-panel h1{
+    text-align: center;
+}
+.signup p input{
+    border-bottom: .1em solid #000;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    box-shadow: none;
+    background: none;
+    
+}
+
+.signup label{
+    display:none;
+}
+.button{
+    background: #000;
+}
+
+.signup-panel p a{
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: underline;
 }
