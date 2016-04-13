@@ -14,4 +14,5 @@ urlpatterns = patterns('',
         url(r'^location/$', views.location, name='location'),
         url(r'^skills/$', views.skills, name='skills'),
         url(r'^days/$', views.days, name='days'),
+        url(r'^create/$', views.create_opportunity_form, name = "create"),
         )

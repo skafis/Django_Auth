@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form" style= "background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:5px;height:vh;" >
+    <form class = "small-centered input" method="POST" action="" style="width:500px; ">{% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="post" save />
+    </form>
+</div>
+    
+{% endblock %}

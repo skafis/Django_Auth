@@ -11,7 +11,7 @@ from .models import Opportunity
 # Kiilu imports
 # Rendering views
 from .models import SimplePlace
-from .forms import PlaceForm, PlacedForm, SkillsForm, DateForm
+from .forms import PlaceForm, PlacedForm, SkillsForm, DateForm, addForm
 
 from django.utils import timezone
 
@@ -80,7 +80,8 @@ def browseOpportunity(request):
 # 		}
 		
 # 	return render(request, "post_list.html", context)	
-
+#############################################################################
+# Chris Kiilu
 def location(request):
 	# Location page view
 	form = PlacedForm(data = request.POST)
@@ -168,3 +169,20 @@ def calc_dist(lat1, lon1, lat2, lon2):
 	earth_radius = 6371
 	# return distance in miles
 	return earth_radius * c
+	
+#############################################################
+#frank
+
+#create opportunity form view
+def create_opportunity_form(request):
+    form = addForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit = False)
+        print form.cleaned_data.get("description")
+        instance.save()
+    context = {
+        'form' : form
+    }
+    return render(request, 'profiles/create_opportunity.html', context)
+    
+###############################################################    

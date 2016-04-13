@@ -1,38 +1,36 @@
-
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 {% block extended_head %}
-<!-- Foundation css -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+
 {% endblock %}
-{% block main_content %}
-<div class="column small-centered text-center" style="width:500px;padding:0;">
+{% block content %}
+<div class="column small-centered text-center" style="width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding-top:10px;padding-bottom:10px;">
 	<h4>Where can you help?</h4>
-<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
+<form method="POST" action="{% url 'days' %}" enctype="multipart/form-data" autocomplete='off'>
 		{% csrf_token %}
 		<p>
 		<label>Location: </label>
 		{{ form.city }}
 		</p>
 		<p>
-		<label>Ditance away(in km): </label>
+		<label>Distance away(in km): </label>
 		{{ form.duration }}
 		</p>
 		<p>
-		<label>Coordinates(Do not fill: </label>
+		<label>Coordinates(Do not fill): </label>
 		{{ form.location }}
 		</p>
 
-		<input type="submit" class="button text-center" value="Set Location Preference">
+		<input type="submit" class="button text-center" value="Next">
 	</form>
 	<div>
-	Nearby Locations
+	<!--Nearby Locations-->
 	<ul>
 	{% for x in other_places %}
 	<li>{{ x.city }}</li>
 	{% endfor %}
 	</ul>
-	<a href="{% url 'days' %}">Next page</a>
 	</div>
 <!-- Jquery js -->
 <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>

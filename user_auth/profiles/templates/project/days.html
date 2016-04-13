@@ -1,35 +1,28 @@
-
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 {% block extended_head %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<!-- Foundation css -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+
 
   {% endblock %}
-{% block main_content %}
+{% block content %}
 
-<div class="column small-centered" style="width:500px;padding:0;">
-<p>Date: <input type="text" id="datepicker"></p>
-<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
+<div class="column small-centered text-center" style="width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:10px;">
+  
+<form method="POST" action="{% url 'skills' %}" enctype="multipart/form-data" autocomplete='off'>
 		{% csrf_token %}
+		<h4>When are you free?</h4>
+		<p><label>Date: </label>{{ date.date }}</p>
+		<h4>How much time can you give this week?</h4>
 		<p><label>Hours: </label>{{ date.hours }}</p>
 
-		<input onclick="window.href='{% url 'skills' %}';" type="submit" class="button" value="Next">
+		<input type="submit" class="button" value="Next">
 	</form>
 </div>
 <!-- Jquery js -->
-<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script>
-  $(function() {
-    $( "#datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      yearRange: "1900:2100",
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
-    });
-  });
-  </script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
 {% endblock %}

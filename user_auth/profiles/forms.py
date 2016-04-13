@@ -2,7 +2,7 @@ from django import forms
 from django.utils import timezone
 import datetime
 
-from .models import SimplePlace, Skills, Skill, Dated
+from .models import SimplePlace, Skills, Skill, Dated, Create_opportunity
 
 class PlaceForm(forms.ModelForm):
 	class Meta:
@@ -48,8 +48,24 @@ class DateForm(forms.ModelForm):
 		'hours'
 		]
 		widgets = {
-		'date': forms.TextInput(attrs=
-                                {
-                                    'id':'datepicker'
-                                })
+		'date': forms.DateInput(attrs={
+			'id': 'datepicker'
+			})
 		}
+		
+#########################################################################
+#frank
+class addForm(forms.ModelForm):
+    class Meta:
+        model = Create_opportunity
+        fields = [
+        	"image",
+            "title",
+            "location",
+            "skills_needed",
+            "hours_required",
+            "days",
+            "description",
+        ]
+        
+#############################################################################
