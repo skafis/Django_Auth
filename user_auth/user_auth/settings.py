@@ -146,7 +146,7 @@ SITE_ID = 1
 # redirect to login
 LOGIN_URL = '/accounts/login/'
 # redirect to home
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/usertype/'
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
