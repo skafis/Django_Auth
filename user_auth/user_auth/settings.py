@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.linkedin',
+    'location_field',
 ]
 
 MIDDLEWARE_CLASSES = [

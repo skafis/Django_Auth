@@ -1,0 +1,35 @@
+
+
+{% load staticfiles %}
+{% block extended_head %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!-- Foundation css -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+
+  {% endblock %}
+{% block main_content %}
+
+<div class="column small-centered" style="width:500px;padding:0;">
+<p>Date: <input type="text" id="datepicker"></p>
+<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
+		{% csrf_token %}
+		<p><label>Hours: </label>{{ date.hours }}</p>
+
+		<input onclick="window.href='{% url 'skills' %}';" type="submit" class="button" value="Next">
+	</form>
+</div>
+<!-- Jquery js -->
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2100",
+
+    });
+  });
+  </script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+{% endblock %}

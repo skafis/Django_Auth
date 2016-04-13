@@ -1,0 +1,45 @@
+
+
+{% load staticfiles %}
+{% block extended_head %}
+<!-- Foundation css -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+{% endblock %}
+{% block main_content %}
+<div class="column small-centered text-center" style="width:500px;padding:0;">
+	<h4>Where can you help?</h4>
+<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
+		{% csrf_token %}
+		<p>
+		<label>Location: </label>
+		{{ form.city }}
+		</p>
+		<p>
+		<label>Ditance away(in km): </label>
+		{{ form.duration }}
+		</p>
+		<p>
+		<label>Coordinates(Do not fill: </label>
+		{{ form.location }}
+		</p>
+
+		<input type="submit" class="button text-center" value="Set Location Preference">
+	</form>
+	<div>
+	Nearby Locations
+	<ul>
+	{% for x in other_places %}
+	<li>{{ x.city }}</li>
+	{% endfor %}
+	</ul>
+	<a href="{% url 'days' %}">Next page</a>
+	</div>
+<!-- Jquery js -->
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.livequery.js' %}"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyD0MSmH6-nAgxIeJhO_SBiNjrbKyPHhQ9k"></script>
+</div>
+{% endblock %}

@@ -1,1 +1,11 @@
-<p>Seeker</p>
+{% extends 'base.html' %}
+{% load staticfiles  %}
+
+{% block content %}
+
+<p>Welcome, {{ user.username }}.</p>
+    <a href="" class="success hollow button">request help</a><br><br>
+    <a href="" class="success hollow button"> Current Request </a> <br><br>
+    <a href="" class="success hollow button"> Community </a> <br><br>
+
+{% endblock %}

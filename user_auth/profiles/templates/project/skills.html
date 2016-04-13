@@ -1,0 +1,26 @@
+
+
+{% load staticfiles %}
+{% block extended_head %}
+<!-- Foundation css -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+{% endblock %}
+{% block main_content %}
+<div class="row column small-8 small-centered text-center">	
+    <h4>What are your skills?</h4>
+    <form method="GET" action="" class="column small-12">
+        <input type="text" placeholder="Search for post..." name="q" class="column" style="width:70%; margin: 1%;" id="blog-search" value="{{ request.GET.q }}">
+        <input type="submit" class="column"  style="width:20%; margin: 1%;  padding: 1%;">
+    </form>
+    <form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
+		{% csrf_token %}
+		{{ form.date }}
+		{{ form.hours }}
+
+		<input type="submit" class="button" value="Choose Skills">
+		<a href="/helper/">Next page</a>
+	</form>
+</div>
+
+
+{% endblock %}

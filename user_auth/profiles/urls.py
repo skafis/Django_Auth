@@ -11,4 +11,7 @@ urlpatterns = patterns('',
         url(r'^usertype/$', views.usertype),
         url(r'^helper/$', views.helper),
         url(r'^seeker/$', views.seeker),
+        url(r'^location/$', views.location, name='location'),
+        url(r'^skills/$', views.skills, name='skills'),
+        url(r'^days/$', views.days, name='days'),
         )

@@ -8,6 +8,18 @@ from django.contrib import messages
 
 from .models import Opportunity
 
+# Kiilu imports
+# Rendering views
+from .models import SimplePlace
+from .forms import PlaceForm, PlacedForm, SkillsForm, DateForm
+
+from django.utils import timezone
+
+# Math class
+import math
+
+from django.db.models import Q
+
 
 # Create your views here.
 def index(request):
@@ -68,3 +80,91 @@ def browseOpportunity(request):
 # 		}
 		
 # 	return render(request, "post_list.html", context)	
+
+def location(request):
+	# Location page view
+	form = PlacedForm(data = request.POST)
+	nearby_places = []
+	other_places = SimplePlace.objects.values('location', 'city')
+	
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.user = request.user
+		instance.save()
+		
+		for place in other_places:
+			if place['location'].split(",") != ['']:
+				lat = float(place['location'].split(",")[0])
+				lng = float(place['location'].split(",")[1])
+				current_lat = float(instance.location.split(",")[0])
+				current_lng = float(instance.location.split(",")[1])
+				
+				# Calculate places within a certain distance
+				distance = calc_dist(current_lat, current_lng, lat, lng)
+		
+				if distance < 50.0 and instance.city != place['city']:
+					nearby_places.append(place)
+
+
+		# Remove duplicates
+		nearby_places = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in nearby_places)]
+
+	
+
+	context = {
+		'other_places':nearby_places,	
+		'form':form,
+	}
+	return render(request, "project/location.html", context)
+	
+def skills(request):
+	form = SkillsForm(data = request.POST)	
+	query = request.GET.get("q")
+	if query:
+		form.fields['skills'].queryset = form.fields['skills'].queryset.filter(Q(skill__icontains=query))
+		
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.user =request.user
+		instance.save()
+
+
+	context = {
+		"form": form,
+	}
+	return render(request, "project/skills.html", context)
+
+def days(request):
+	date = DateForm(data = request.POST)
+	if date.is_valid():
+		instance = date.save(commit=False)
+		instance.user = request.user
+		instance.save()
+	context = {
+		'date': date,
+	}
+	return render(request, "project/days.html", context)
+	
+def calc_dist(lat1, lon1, lat2, lon2):
+	'''a function to calculate the distance in miles between two 
+	points on the earth, given their latitudes and longitudes in degrees'''
+
+
+	# covert degrees to radians
+	lat1 = math.radians(lat1)
+	lon1 = math.radians(lon1)
+	lat2 = math.radians(lat2)
+	lon2 = math.radians(lon2) 
+
+	# get the differences
+	delta_lat = lat2 - lat1 
+	delta_lon = lon2 - lon1 
+
+	# Haversine formula, 
+	# from http://www.movable-type.co.uk/scripts/latlong.html
+	a = ((math.sin(delta_lat/2))**2) + math.cos(lat1)*math.cos(lat2)*((math.sin(delta_lon/2))**2) 
+	c = 2 * math.atan2(a**0.5, (1-a)**0.5)
+	# earth's radius in km
+	earth_radius = 6371
+	# return distance in miles
+	return earth_radius * c
