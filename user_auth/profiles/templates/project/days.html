@@ -10,7 +10,7 @@
 
 <div class="column small-centered text-center" style="width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:10px;">
   
-<form method="POST" action="{% url 'skills' %}" enctype="multipart/form-data" autocomplete='off'>
+<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
 		{% csrf_token %}
 		<h4>When are you free?</h4>
 		<p><label>Date: </label>{{ date.date }}</p>
@@ -21,8 +21,8 @@
 	</form>
 </div>
 <!-- Jquery js -->
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
+</script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
 {% endblock %}

@@ -14,16 +14,20 @@ body{
 .wrapper h1{
   text-transform:uppercase;
   text-decoration:underline;
+  font-size: 1.4em;
 }
 .wrapper p{
-  text-align:center;
-      font-size: 2em;
+      text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .wrapper p:nth-child(3){
       font-size: 1em;
+      text-transform:Capitalize;
 }
 .wrapper{
-  width: 40%;
+   width: 55%;
     margin: 10% auto;
     text-align: center;
 }

@@ -7,19 +7,19 @@
 {% block content %}
 <div class="column small-centered text-center" style="width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding-top:10px;padding-bottom:10px;">
 	<h4>Where can you help?</h4>
-<form method="POST" action="{% url 'days' %}" enctype="multipart/form-data" autocomplete='off'>
+<form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
 		{% csrf_token %}
 		<p>
 		<label>Location: </label>
-		{{ form.city }}
+		{{ form.location }}
 		</p>
 		<p>
 		<label>Distance away(in km): </label>
-		{{ form.duration }}
+		{{ form.distance_away }}
 		</p>
 		<p>
 		<label>Coordinates(Do not fill): </label>
-		{{ form.location }}
+		{{ form.coordinates }}
 		</p>
 
 		<input type="submit" class="button text-center" value="Next">
@@ -32,8 +32,6 @@
 	{% endfor %}
 	</ul>
 	</div>
-<!-- Jquery js -->
-<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>

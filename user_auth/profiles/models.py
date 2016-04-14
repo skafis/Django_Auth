@@ -8,7 +8,9 @@ from django.conf import settings
 # Kiilus imports
 from django.core.urlresolvers import reverse
 from location_field.models.plain import PlainLocationField
-
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+from django.core.validators import MinValueValidator
 # Create your models here.
 # Create your models here.
 class profile(models.Model):
@@ -20,20 +22,23 @@ class profile(models.Model):
 		
 		
 		
-class Opportunity(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
-	title = models.CharField(max_length=120)
-	image = models.ImageField(null=True, blank=True)
-	description = models.TextField()
-	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+# class Opportunity(models.Model):
+# 	user = models.ForeignKey(
+# 	    settings.AUTH_USER_MODEL,
+# 	    on_delete=models.CASCADE,
+# 	    )
+# 	title = models.CharField(max_length=120)
+# 	image = models.ImageField(null=True, blank=True)
+# 	description = models.TextField()
+# 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	
 	
-	def __str__(self):
-		return self.title
+# 	def __str__(self):
+# 		return self.title
 
 
-	def __unicode__(self):
-		return self.title
+# 	def __unicode__(self):
+# 		return self.title
 #===============================================
 # Kiilu
 class Skills(models.Model):
@@ -42,50 +47,73 @@ class Skills(models.Model):
         return self.skill
 
 class SimplePlace(models.Model):
-    user =  models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-    duration = models.IntegerField(default=0)
-    city = models.CharField(max_length=255)
-    location = PlainLocationField(based_fields=['city'], zoom=7)
-    skills = models.ManyToManyField(Skills)
+    user =  models.OneToOneField(
+	    settings.AUTH_USER_MODEL,
+	    on_delete=models.CASCADE,
+	    primary_key=True,
+	    )
+    distance_away = models.IntegerField(default=0,  validators=[MinValueValidator(0)])
+    location = models.CharField(max_length=255)
+    coordinates = PlainLocationField(based_fields=['location'], zoom=7)
 
     def __unicode__(self):
-    	return self.city
+    	return self.location
 
     def get_absolute_url(self):
 		return reverse("page", kwargs={"id": self.id})
+		
+    def clean(self):
+        if self.distance_away < 0:
+            raise ValidationError(_('Only numbers equal to 0 or greater are accepted.'))
 
-class Skill(models.Model):
-    skill = models.ManyToManyField(SimplePlace)
-
+class UserSkills(models.Model):
+    user =  models.OneToOneField(
+	    settings.AUTH_USER_MODEL,
+	    on_delete=models.CASCADE,
+	    primary_key=True,
+	    )
+    skills = models.ManyToManyField(Skills)
+    
+    def __unicode__(self):
+    	return str(self.user)
 
 class Dated(models.Model):
     user =  models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-    )
+        )
     date = models.DateField()
     hours = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+    	return str(self.user)
 #=======================================================
 
 #########################################################
 #frank
 # models for creating opportunity
 class Create_opportunity(models.Model):
+    user =  models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        )
     image = models.ImageField(upload_to='static/image', verbose_name='My Photo', blank = True, default = 0)
     title = models.CharField(max_length=140)
-    location = models.CharField(max_length=140)
+    location = models.CharField(max_length=255)
+    coordinates = PlainLocationField(based_fields=['location'], zoom=7)
     description = models.TextField(null=True)
-    skills_needed = models.CharField(max_length=140, blank = True)
+    skills = models.ManyToManyField(Skills)
     hours_required = models.CharField(max_length=140, blank = True)
-    days = models.CharField(max_length=140, blank = True)
+    starting_date = models.DateField()
+    stopping_date = models.DateField()
     created_date = models.DateTimeField(
-            default=timezone.now)
+            default=timezone.now
+            )
 
     def __unicode__(self):
         return self.title
 
     def __str__(self):
         return self.title
+        
+##################################################################################################################################

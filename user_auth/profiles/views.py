@@ -6,12 +6,12 @@ from django.utils import timezone
 from urllib import quote_plus
 from django.contrib import messages
 
-from .models import Opportunity
+
 
 # Kiilu imports
 # Rendering views
-from .models import SimplePlace
-from .forms import PlaceForm, PlacedForm, SkillsForm, DateForm, addForm
+from .models import SimplePlace, Create_opportunity
+from .forms import SingleSkillForm, PlacedForm, SkillsForm, DateForm, addForm
 
 from django.utils import timezone
 
@@ -83,10 +83,10 @@ def browseOpportunity(request):
 #############################################################################
 # Chris Kiilu
 def location(request):
-	# Location page view
+	# coordinates page view
 	form = PlacedForm(data = request.POST)
 	nearby_places = []
-	other_places = SimplePlace.objects.values('location', 'city')
+	other_places = SimplePlace.objects.values('coordinates', 'location')
 	
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -94,16 +94,16 @@ def location(request):
 		instance.save()
 		
 		for place in other_places:
-			if place['location'].split(",") != ['']:
-				lat = float(place['location'].split(",")[0])
-				lng = float(place['location'].split(",")[1])
-				current_lat = float(instance.location.split(",")[0])
-				current_lng = float(instance.location.split(",")[1])
+			if place['coordinates'].split(",") != ['']:
+				lat = float(place['coordinates'].split(",")[0])
+				lng = float(place['coordinates'].split(",")[1])
+				current_lat = float(instance.coordinates.split(",")[0])
+				current_lng = float(instance.coordinates.split(",")[1])
 				
 				# Calculate places within a certain distance
 				distance = calc_dist(current_lat, current_lng, lat, lng)
 		
-				if distance < 50.0 and instance.city != place['city']:
+				if distance < 50.0 and instance.location != place['location']:
 					nearby_places.append(place)
 
 
@@ -120,6 +120,7 @@ def location(request):
 	
 def skills(request):
 	form = SkillsForm(data = request.POST)	
+	singleskill = SingleSkillForm(data=request.POST)
 	query = request.GET.get("q")
 	if query:
 		form.fields['skills'].queryset = form.fields['skills'].queryset.filter(Q(skill__icontains=query))
@@ -128,10 +129,13 @@ def skills(request):
 		instance = form.save(commit=False)
 		instance.user =request.user
 		instance.save()
-
+	if singleskill.is_valid():
+		instance = singleskill.save(commit=False)
+		instance.save()
 
 	context = {
 		"form": form,
+		'singleskill': singleskill,
 	}
 	return render(request, "project/skills.html", context)
 
@@ -175,14 +179,22 @@ def calc_dist(lat1, lon1, lat2, lon2):
 
 #create opportunity form view
 def create_opportunity_form(request):
-    form = addForm(request.POST or None)
+    form = addForm(data = request.POST or None)
     if form.is_valid():
         instance = form.save(commit = False)
+        instance.user = request.user
         print form.cleaned_data.get("description")
         instance.save()
     context = {
         'form' : form
     }
     return render(request, 'profiles/create_opportunity.html', context)
+    
+def browse(request):	
+    show_items = Create_opportunity.objects.order_by('-created_date')
+    context = {
+        'show_items': show_items
+    }
+    return render(request, 'profiles/browse.html', context)
     
 ###############################################################    

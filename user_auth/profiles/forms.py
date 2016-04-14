@@ -2,40 +2,32 @@ from django import forms
 from django.utils import timezone
 import datetime
 
-from .models import SimplePlace, Skills, Skill, Dated, Create_opportunity
+from .models import SimplePlace, Skills,  Dated, Create_opportunity, UserSkills
 
-class PlaceForm(forms.ModelForm):
+class SingleSkillForm(forms.ModelForm):
 	class Meta:
-		model = SimplePlace
+		model = Skills
 		fields = [
-		'city',
-		'location',
-		'skills'
+		'skill'
 		]
-		widgets = {
-			'skills': forms.CheckboxSelectMultiple
-		}
 
 class PlacedForm(forms.ModelForm):
 	class Meta:
 		model = SimplePlace
 		fields = [
-		'city',
 		'location',
-		'duration',
+		'coordinates',
+		'distance_away',
 		]
+		
 class SkillsForm(forms.ModelForm):
 	class Meta:
-		model = SimplePlace
-		day = forms.DateField(widget=forms.TextInput(attrs=
-                                {
-                                    'id':'datepicker'
-                                }))
+		model = UserSkills
 		fields = [
 		'skills',
 		]
 		widgets = {
-			'skills': forms.CheckboxSelectMultiple
+			'skills': forms.CheckboxSelectMultiple(attrs={'id': 'skillform'})
 		}
 
 
@@ -49,7 +41,7 @@ class DateForm(forms.ModelForm):
 		]
 		widgets = {
 		'date': forms.DateInput(attrs={
-			'id': 'datepicker'
+			'class': 'datepicker'
 			})
 		}
 		
@@ -62,10 +54,17 @@ class addForm(forms.ModelForm):
         	"image",
             "title",
             "location",
-            "skills_needed",
+            "coordinates",
+            "skills",
             "hours_required",
-            "days",
+            "starting_date",
+            "stopping_date",
             "description",
         ]
+	widgets = {
+			'skills': forms.CheckboxSelectMultiple(attrs={'id': 'skillform'}),
+			'starting_date': forms.DateInput(attrs={'class': 'datepicker'}),
+			'stopping_date': forms.DateInput(attrs={'class': 'datepicker'}),
+		}
         
 #############################################################################

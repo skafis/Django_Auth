@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
+{% block extended_head %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+{% endblock %}
 {% block content %}
-<div class="form" style= "background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:5px;height:vh;" >
+<div class="form" style= "background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:5px;height:vh" >
     <form class = "small-centered input" method="POST" action="" style="width:500px; ">{% csrf_token %}
         {{ form.as_p }}
     <input type="submit" value="post" save />
     </form>
 </div>
-    
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.livequery.js' %}"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyD0MSmH6-nAgxIeJhO_SBiNjrbKyPHhQ9k"></script>
 {% endblock %}
