@@ -12,8 +12,7 @@ from django.contrib import messages
 # Rendering views
 from .models import SimplePlace, Create_opportunity
 from .forms import SingleSkillForm, PlacedForm, SkillsForm, DateForm, addForm
-
-from django.utils import timezone
+from datetime import timedelta
 
 # Math class
 import math
@@ -173,7 +172,17 @@ def calc_dist(lat1, lon1, lat2, lon2):
 	earth_radius = 6371
 	# return distance in miles
 	return earth_radius * c
-	
+
+def current_opportunities(request):
+	current = Create_opportunity.objects.filter(
+		Q(user__exact=request.user.id)&
+		Q(stopping_date__gt=timezone.now())&
+		Q(starting_date__lte=timezone.now() + timedelta(days=30))
+		)
+	context = {
+		'current':current,
+	}
+	return render(request, 'profiles/current_opportunities.html', context)
 #############################################################
 #frank
 
@@ -185,6 +194,7 @@ def create_opportunity_form(request):
         instance.user = request.user
         print form.cleaned_data.get("description")
         instance.save()
+        return redirect('/seeker/')
     context = {
         'form' : form
     }
