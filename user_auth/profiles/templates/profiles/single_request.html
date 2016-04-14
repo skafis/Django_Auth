@@ -1,0 +1,9 @@
+
+<p>{{ opportunity.title }}</p>
+<p>{{ opportunity.location }}</p>
+<div>{{ opportunity.description }}</div>
+{% for skill in opportunity.skills.all %}
+<p>{{ skill }}</p>
+{% endfor %}
+<p>{{ opportunity.starting_date }}</p>
+<p>{{ opportunity.stopping_date }}</p>

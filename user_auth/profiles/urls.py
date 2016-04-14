@@ -16,5 +16,6 @@ urlpatterns = [
         url(r'^days/$', views.days, name='days'),
         url(r'^create/$', views.create_opportunity_form, name = "create"),
         url(r'^browse/$', views.browse, name = "browse"),
-        url(r'current/$', views.current_opportunities, name="current_opportunities")
+        url(r'current/$', views.current_opportunities, name="current_opportunities"),
+        url(r'opportunity/(?P<id>[0-9]+)/$', views.single_request, name="single_request"),
         ]

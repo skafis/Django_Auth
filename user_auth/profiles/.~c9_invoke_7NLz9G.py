@@ -187,7 +187,7 @@ def current_opportunities(request):
 	
 def single_request(request, id=None):
 	opportunity = get_object_or_404(Create_opportunity, id = id)
-	print opportunity.skills.values('skill')
+	print opportunity.skills
 	context = {
 		'opportunity':opportunity,
 	}
@@ -203,8 +203,7 @@ def create_opportunity_form(request):
         instance.user = request.user
         print form.cleaned_data.get("description")
         instance.save()
-        print form.cleaned_data.get("skills")
-        form.save_m2m()
+		form.save_m2m()
         
         return redirect('/seeker/')
     context = {

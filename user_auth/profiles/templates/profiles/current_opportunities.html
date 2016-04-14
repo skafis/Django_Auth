@@ -1,5 +1,6 @@
 {% for opportunity in current %}
-<p>{{ opportunity.title }}</p>
-<p>{{ opportunity.skills }}</p>
+<a href="{{ opportunity.get_absolute_url }}"><p>{{ opportunity.title }}</p></a>
+<p>Skills:</p>
+{% for s in opportunity.skills.all %}<p>{{ s }}</p>{% endfor %}
 <p>{{ opportunity.starting_date }}</p>
 {% endfor %}

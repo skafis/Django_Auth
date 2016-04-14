@@ -27,7 +27,7 @@ class SkillsForm(forms.ModelForm):
 		'skills',
 		]
 		widgets = {
-			'skills': forms.CheckboxSelectMultiple(attrs={'id': 'skillform'})
+			'skills': forms.CheckboxSelectMultiple(attrs={'class': 'skillform'}),
 		}
 
 
@@ -61,10 +61,10 @@ class addForm(forms.ModelForm):
             "stopping_date",
             "description",
         ]
-	widgets = {
-			'skills': forms.CheckboxSelectMultiple(attrs={'id': 'skillform'}),
-			'starting_date': forms.DateInput(attrs={'class': 'datepicker'}),
-			'stopping_date': forms.DateInput(attrs={'class': 'datepicker'}),
-		}
+        widgets = {
+        	'skills': forms.CheckboxSelectMultiple(attrs={'class': 'skillform'}),
+        	'starting_date': forms.DateInput(attrs={'class': 'datepicker'}),
+        	'stopping_date': forms.DateInput(attrs={'class':'datepicker'})
+        }
         
 #############################################################################
