@@ -386,3 +386,8 @@ z-index: 1000000000;
     background-color: #000;
     color: #fff;
 }
+
+.details{
+  background-color: white;
+  color: white;
+}

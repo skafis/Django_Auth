@@ -108,6 +108,8 @@ def location(request):
 
 		# Remove duplicates
 		nearby_places = [dict(tupleized) for tupleized in set(tuple(item.items()) for item in nearby_places)]
+					
+		return redirect('days')
 
 	
 
@@ -129,6 +131,8 @@ def skills(request):
 		instance.user =request.user
 		instance.save()
 		form.save_m2m()
+		return redirect('helper')
+		
 	if singleskill.is_valid():
 		instance = singleskill.save(commit=False)
 		instance.save()
@@ -145,6 +149,7 @@ def days(request):
 		instance = date.save(commit=False)
 		instance.user = request.user
 		instance.save()
+		return redirect('skills')
 	context = {
 		'date': date,
 	}
@@ -187,11 +192,13 @@ def current_opportunities(request):
 	
 def single_request(request, id=None):
 	opportunity = get_object_or_404(Create_opportunity, id = id)
-	print opportunity.skills.values('skill')
+	print opportunity.title
 	context = {
 		'opportunity':opportunity,
 	}
 	return render(request, 'profiles/single_request.html', context)
+
+
 #############################################################
 #frank
 

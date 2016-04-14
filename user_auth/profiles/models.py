@@ -118,5 +118,7 @@ class Create_opportunity(models.Model):
     
     def get_absolute_url(self):
         return reverse('single_request', kwargs={'id': self.id})
+    def get_absolute_chat_url(self):
+        return reverse('chat:new_room', kwargs={'id': self.id})
         
 ##################################################################################################################################

@@ -17,6 +17,6 @@
     </form>
   <p><a class="button profile_links" href="{% url 'create' %}">Request Help</a></p>
   <p><a class="button profile_links" href="{% url 'current_opportunities' %}">Recent Activities</a></p>
-  <p><a class="button profile_links" href="">Community</a></p>
+  <p><a class="button profile_links" href="{%  url 'chat:view_rooms' %}">Community</a></p>
 </div>
 {% endblock %}
