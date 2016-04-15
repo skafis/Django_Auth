@@ -87,6 +87,16 @@ class Dated(models.Model):
     
     def __unicode__(self):
     	return str(self.user)
+
+# class RequestApplication(models.Model):
+#     user =  models.OneToOneField(
+# 	    settings.AUTH_USER_MODEL,
+# 	    on_delete=models.CASCADE
+# 	    )
+# 	requests = models.OneToOneField(
+# 	    Create_opportunity,
+# 	    on_delete=models.CASCADE)
+# 	application = models.BooleanField()
 #=======================================================
 
 #########################################################

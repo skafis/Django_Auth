@@ -8,13 +8,12 @@
   {% endblock %}
 {% block content %}
 
-<div class="column small-centered text-center" style="width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:10px;">
-  
+<div class="column small-centered text-center volunter_date" >
 <form method="POST" action="" enctype="multipart/form-data" autocomplete='off'>
 		{% csrf_token %}
 		<h4>When are you free?</h4>
 		<p><label>Date: </label>{{ date.date }}</p>
-		<h4>How much time can you give this week?</h4>
+		<h4>How much time can you give per week?</h4>
 		<p><label>Hours: </label>{{ date.hours }}</p>
 
 		<input type="submit" class="button" value="Next">

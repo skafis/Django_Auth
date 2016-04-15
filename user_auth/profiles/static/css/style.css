@@ -1,9 +1,19 @@
 body{
-    /*background-image: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.65)), url('http://www.timeslive.co.za/incoming/2012/08/17/black_and_white_hands.jpg/ALTERNATES/crop_630x400/black_and_white_hands.jpg');*/
+   background-image: linear-gradient( rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.66)), url('http://i.stack.imgur.com/QbYSz.png');
+background-repeat: no-repeat;
+background-size: 100% 100%;
+color:#fff;
+/*text-align: center;*/
+}
+.landing{
+    background-image: url('http://i.stack.imgur.com/QbYSz.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-color: #000;
+    /*background-color: #000;*/
     overflow: hidden;
+    max-height: 100vh;
+    height: 100vh;
+    width: 100%;
        
 
 }
@@ -14,21 +24,23 @@ body{
 .wrapper h1{
   text-transform:uppercase;
   text-decoration:underline;
-  font-size: 1.4em;
+  font-family: 'Cardo', serif;
 }
 .wrapper p{
       text-align: center;
     font-size: 2em;
     text-transform: uppercase;
     font-weight: bold;
+    font-family: 'Oswald', sans-serif;
 }
 .wrapper p:nth-child(3){
       font-size: 1em;
       text-transform:Capitalize;
+      font-family: 'Cardo', serif;
 }
 .wrapper{
    width: 55%;
-    margin: 10% auto;
+    margin: 15% auto;
     text-align: center;
 }
 .wrapper.form-success .container h1 {
@@ -145,7 +157,10 @@ body{
             transform: translateY(-700px) rotate(600deg);
   }
 }
-
+.ontop{
+    position: relative;
+    z-index: 1000;
+}
 /* SignUp style*/
 .signup_box{
     background-color: rgba(255, 255, 255, 0.33);
@@ -242,7 +257,9 @@ body{
     z-index: 0;
 }
 
-
+.logout{
+  margin: 2% 5%;
+}
 .div-icon {
 z-index: 1000000000;
     background: #E5E5E5;
@@ -258,7 +275,9 @@ z-index: 1000000000;
     display: table-cell;
     text-align: center;
     vertical-align: middle; }
-
+.div-icon span img{
+  width: 70%;
+}
 .info h4 {
   font-size: 26px;
   letter-spacing: 2px;
@@ -390,4 +409,20 @@ z-index: 1000000000;
 .details{
   background-color: white;
   color: white;
+}
+/*volunter_form*/
+.volunter_form{
+  background-color: rgba(255, 255, 255, 0.33);
+  margin-top: 3%;
+  text-align: center;
+  border: .01em solid beige;
+  border-radius: .2em;
+  margin-left: 30%;
+  height: 90vh;
+}
+.volunter_date{
+  width:500px;padding:0;background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:10px;
+  border: .01em solid beige;
+  border-radius: .2em;
+  
 }

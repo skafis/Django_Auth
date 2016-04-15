@@ -32,10 +32,9 @@
       </tfoot>
     </table>
   </form>
-{% endblock content %}
-
-{% block afterbody %}
-  <script type="text/javascript" src='{% static "js/jquery-1.12.1.min.js" %}'></script>
+  
   <script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>
   <script type="text/javascript" src='{% static "js/chat.js" %}'></script>
-{% endblock afterbody %}
+
+{% endblock content %}
+
