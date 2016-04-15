@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -143,6 +143,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'user_auth/staticfiles')
 STARTICFILES_DIR = (
     os.path.join(BASE_DIR, 'profiles' , 'static'),
 )
+# Media files
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media_cdn")
+MEDIA_URL = "/media/"
+
+
 SITE_ID = 1
 
 # allauth config

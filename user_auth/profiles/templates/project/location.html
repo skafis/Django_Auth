@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% block extended_head %}
-
+<link rel="stylesheet" href="{% static 'css/skills.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
 <div class="columns large-5 large-offset-3 volunter_form">
@@ -19,7 +19,6 @@
 		{{ form.distance_away }}
 		</p>
 		<p>
-		<label>Coordinates(Do not fill): </label>
 		{{ form.coordinates }}
 		</p>
 

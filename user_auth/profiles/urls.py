@@ -17,5 +17,6 @@ urlpatterns = [
         url(r'^create/$', views.create_opportunity_form, name = "create"),
         url(r'^browse/$', views.browse, name = "browse"),
         url(r'current/$', views.current_opportunities, name="current_opportunities"),
+        url(r'browse/opportunity/(?P<id>[0-9]+)/$', views.helper_request, name="helper_request"),
         url(r'opportunity/(?P<id>[0-9]+)/$', views.single_request, name="single_request"),
         ]

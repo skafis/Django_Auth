@@ -26,3 +26,5 @@ urlpatterns = [
     url(r'^', include('profiles.urls')),
     url(r'^chat/', include('chat.urls', namespace="chat")),
 ]
+if settings.DEBUG:
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

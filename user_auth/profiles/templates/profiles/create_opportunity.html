@@ -2,12 +2,28 @@
 {% load staticfiles %}
 {% block extended_head %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{% static 'css/skills.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
-<div class="form" style= "background-color:rgba(255, 255, 255, 0.33);top: 50%;transform: translateY(-50%);position: relative;padding:5px;height:vh" >
-    <form class = "small-centered input" method="POST" action="" style="width:500px; ">{% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="post" save />
+<div class="form create"  >
+    <form class = "input" method="POST" action="" style="max-height:100vh;">{% csrf_token %}
+    <div class="column small-6">
+       <p><label>Image: </label>{{ form.image }}</p>
+        <p><label>Title: </label>{{ form.title }}</p>
+        <p><label>Description: </label>{{ form.description }}</p>
+        <p><label>Starting Date: </label>{{ form.starting_date }}</p>
+        <p><label>Stopping Date: </label>{{ form.stopping_date }}</p>
+        <p><label>Hours Required: </label>{{ form.hours_required }}</p>
+        
+    
+    </div>
+    <div class="column small-6">
+        <p><label>Location: </label>{{ form.location }}</p>
+        <p>{{ form.coordinates }}</p>
+        <p><label>Required Skills: </label>{{ form.skills }}</p>
+        <input type="submit" value="Create Opportunity" class="button" save />
+    </div>
+        
     </form>
 </div>
 

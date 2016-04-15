@@ -128,7 +128,21 @@ class Create_opportunity(models.Model):
     
     def get_absolute_url(self):
         return reverse('single_request', kwargs={'id': self.id})
+    def get_absolute_helper_url(self):
+        return reverse('helper_request', kwargs={'id': self.id})
     def get_absolute_chat_url(self):
         return reverse('chat:new_room', kwargs={'id': self.id})
         
 ##################################################################################################################################
+class RequestApplication(models.Model):
+    user =  models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+        )
+    requests = models.OneToOneField(
+        Create_opportunity,
+        on_delete=models.CASCADE)
+    application = models.BooleanField()
+
+    def __unicode__(self):
+        return str(self.user) + ": " + str(self.requests)

@@ -2,7 +2,8 @@ from django import forms
 from django.utils import timezone
 import datetime
 
-from .models import SimplePlace, Skills,  Dated, Create_opportunity, UserSkills
+from .models import SimplePlace, Skills,  Dated, Create_opportunity, UserSkills, RequestApplication
+from django.utils.translation import ugettext_lazy as _
 
 class SingleSkillForm(forms.ModelForm):
 	class Meta:
@@ -10,6 +11,11 @@ class SingleSkillForm(forms.ModelForm):
 		fields = [
 		'skill'
 		]
+		
+		labels = {
+            "skill": _(""),
+        }
+
 
 class PlacedForm(forms.ModelForm):
 	class Meta:
@@ -27,8 +33,11 @@ class SkillsForm(forms.ModelForm):
 		'skills',
 		]
 		widgets = {
-			'skills': forms.CheckboxSelectMultiple(attrs={'class': 'skillform'}),
+			'skills': forms.CheckboxSelectMultiple(attrs={'class':'skillsform'}),
 		}
+		labels = {
+            "skills": _("Select Skills Here"),
+        }
 
 
 
@@ -43,6 +52,15 @@ class DateForm(forms.ModelForm):
 		'date': forms.DateInput(attrs={
 			'class': 'datepicker'
 			})
+		}
+class ApplyForm(forms.ModelForm):
+	class Meta:
+		model = RequestApplication
+		fields = [
+		'application'
+		]
+		widgets = {
+		'application': forms.RadioSelect
 		}
 		
 #########################################################################

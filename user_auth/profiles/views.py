@@ -10,9 +10,10 @@ from django.contrib import messages
 
 # Kiilu imports
 # Rendering views
-from .models import SimplePlace, Create_opportunity
-from .forms import SingleSkillForm, PlacedForm, SkillsForm, DateForm, addForm
+from .models import SimplePlace, Create_opportunity, RequestApplication
+from .forms import SingleSkillForm, PlacedForm, SkillsForm, DateForm, addForm, ApplyForm
 from datetime import timedelta
+from django.db import transaction
 
 # Math class
 import math
@@ -132,10 +133,14 @@ def skills(request):
 		instance.save()
 		form.save_m2m()
 		return redirect('helper')
+	else:
+		form = SkillsForm()
 		
 	if singleskill.is_valid():
 		instance = singleskill.save(commit=False)
 		instance.save()
+	else:
+		singleskill = SingleSkillForm()
 
 	context = {
 		"form": form,
@@ -198,6 +203,41 @@ def single_request(request, id=None):
 	}
 	return render(request, 'profiles/single_request.html', context)
 
+def helper_request(request, id=None):
+	opportunity = get_object_or_404(Create_opportunity, id = id)
+	if not RequestApplication.objects.filter(requests=opportunity).exists():
+		form = ApplyForm(data = request.POST or None)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.user = request.user
+			instance.requests = opportunity
+			print "Obj not exist"
+			instance.application = True 
+			instance.save()
+			return redirect('browse')
+		else:
+			form = ApplyForm()
+	else:
+		form = ApplyForm(data = request.POST or None, instance=opportunity)		
+		current_request = RequestApplication.objects.filter(requests=opportunity)
+		current_application_val = current_request.values('application')[0]['application']
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.application = False if current_application_val == True else False
+			with transaction.atomic():
+				current_application_val = form.cleaned_data.get("application")
+			print "Obj exists"
+			instance.save()
+			return redirect('browse')
+		else:
+			form = ApplyForm()
+	
+	print opportunity.title
+	context = {
+		'opportunity':opportunity,
+		'form': form,
+	}
+	return render(request, 'profiles/browseOpportunity.html', context)
 
 #############################################################
 #frank
