@@ -265,5 +265,22 @@ def browse(request):
         'show_items': show_items
     }
     return render(request, 'profiles/browse.html', context)
+
+def view_profile(request):
+	name =  request.user.username
+	location = SimplePlace.objects.get(user=request.user.id).location
+	current = Create_opportunity.objects.filter(
+		Q(user__exact=request.user.id) &
+		Q(stopping_date__gt=timezone.now()) &
+		Q(starting_date__lte=timezone.now() + timedelta(days=30))
+	)
+
+	context={
+		'user':name,
+		'location': location,
+		'current': current,
+
+	}
+	return render(request, 'profiles/view_profile.html', context)
     
 ###############################################################    
