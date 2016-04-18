@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+its all right {{ user }}<br>
+{{ location }}<br>
+{% for list in current %}
+{{ list.title }}<br>
+{{ list.location }}<br>
+{% endfor %}
+{% endblock %}
